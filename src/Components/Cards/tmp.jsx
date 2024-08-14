@@ -78,7 +78,6 @@ import styled from "styled-components";
 const Card = styled.div`
   width: 740px;
   height: 580px;
-  // overflow: auto;
   margin-top: 20px;
 `;
 

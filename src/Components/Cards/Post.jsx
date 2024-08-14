@@ -1,85 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComment, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faShare } from "@fortawesome/free-solid-svg-icons/faShare";
 
-const PostContainer = styled.div`
-  max-width: 100vw;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin: 20px 0;
-  padding: 20px;
-`;
-
-const PostHeader = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-`;
-
-const Avatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
-`;
-
-const UserName = styled.h5`
-  margin: 0;
-`;
-
-const PostContent = styled.p`
-  margin: 15px 0;
+const Card = styled.div`
+  max-width: 740px;
+  height: auto;
+  margin-top: 20px;
 `;
 
 const PostImage = styled.img`
-  max-width: 100%;
-  border-radius: 10px;
+  width: 700px;
+  height: 320px;
+  object-fit: cover;
 `;
 
-const PostFooter = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding-top: 15px;
-  border-top: 1px solid gray;
-`;
+const Post = ({ author, time, content, image, likes, comments, shares }) => {
+  const [likeCount, setLikeCount] = useState(likes);
+  const [showComments, setShowComments] = useState(false);
+  const [commentList, setCommentList] = useState(comments);
 
-const InteractionButton = styled.button`
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 16px;
-  &:hover {
-    color: #007bff;
-  }
-`;
+  const handleLike = () => {
+    setLikeCount(likeCount + 1);
+  };
 
-const Post = () => {
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
+
+  const addComment = (text) => {
+    setCommentList([
+      ...commentList,
+      { author: "Current User", text, likes: 0 },
+    ]);
+  };
+
   return (
-    <PostContainer>
-      <PostHeader>
-        <Avatar src="https://via.placeholder.com/50" alt="User Avatar" />
-        <UserName>John Doe</UserName>
-      </PostHeader>
-      <PostContent>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nunc
-        libero, posuere id venenatis non, accumsan ut urna.
-      </PostContent>
-      <PostImage src="https://via.placeholder.com/600x400" alt="Post Image" />
-      <PostFooter>
-        <InteractionButton>
-          <FontAwesomeIcon icon={faHeart} /> Like
-        </InteractionButton>
-        <InteractionButton>
-          <FontAwesomeIcon icon={faComment} /> Comment
-        </InteractionButton>
-        <InteractionButton>
-          <FontAwesomeIcon icon={faShare} /> Share
-        </InteractionButton>
-      </PostFooter>
-    </PostContainer>
+    <Card className="card">
+      <div className="card-body">
+        <div className="d-flex align-items-center mb-3">
+          <img
+            src={author.avatar}
+            alt={author.name}
+            className="rounded-circle me-3"
+            style={{ width: "40px", height: "40px" }}
+          />
+          <div>
+            <h5 className="card-title mb-0">{author.name}</h5>
+            <small className="text-muted">{time}</small>
+          </div>
+        </div>
+        <p className="card-text">{content}</p>
+        <PostImage src={image} alt="Post" className="img-fluid mb-3" />
+        <div className="d-flex justify-content-between mb-3">
+          <small>{likeCount} lượt thích</small>
+          <small>{commentList.length} bình luận</small>
+          <small>{shares} lượt chia sẻ</small>
+        </div>
+        <div className="d-flex justify-content-around mb-3">
+          <button className="btn btn-light" onClick={handleLike}>
+            <i className="fas fa-heart"></i> Thích
+          </button>
+          <button className="btn btn-light" onClick={toggleComments}>
+            <i className="fas fa-comment"></i> Bình luận
+          </button>
+          <button className="btn btn-light">
+            <i className="fas fa-share"></i> Chia sẻ
+          </button>
+        </div>
+        {showComments && (
+          <div>
+            {commentList.map((comment, index) => (
+              <div key={index} className="mb-2">
+                <strong>{comment.author}</strong>: {comment.text}
+                <button className="btn btn-sm btn-light ms-2">Thích</button>
+                <button className="btn btn-sm btn-light ms-2">Trả lời</button>
+              </div>
+            ))}
+            <input
+              type="text"
+              className="form-control mt-3"
+              placeholder="Viết bình luận..."
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  addComment(e.target.value);
+                  e.target.value = "";
+                }
+              }}
+            />
+          </div>
+        )}
+      </div>
+    </Card>
   );
 };
 

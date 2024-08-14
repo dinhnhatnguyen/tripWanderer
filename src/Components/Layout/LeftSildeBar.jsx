@@ -12,7 +12,7 @@ import { faWallet } from "@fortawesome/free-solid-svg-icons/faWallet";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons/faCircleExclamation";
 
 const SidebarContainer = styled.div`
-  width: 260px;
+  max-width: 260px;
   background-color: #ffff;
   min-height: 100vh;
   padding: 20px 20px;

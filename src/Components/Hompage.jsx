@@ -43,25 +43,26 @@ import styled from "styled-components";
 import SlideImage from "./Cards/SlideImage";
 import SocialMediaPost from "./Cards/tmp";
 import Layout from "./Layout/Layout";
-import PostCard from "./Cards/tmp";
+// import Post from "./Cards/Post";
 import testimg from "./Asset/test/HonVuon.jpg";
 
 const HompageContainer = styled.div`
-  // width: 740px;
   min-width: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: space-around;
-  height: 100vh;
+  min-height: 100%;
   overflow-y: scroll;
   overflow: hidden;
-  background-color: White;
+  background-color: transparent;
 `;
 
 const ContentContainer = styled.div`
-  min-height: 100vh;
-  min-width: 100%;
+  width: 100%;
+  max-width: 740px;
+  padding: 10px;
+  margin: 0 auto;
 `;
 
 const Hompage = () => {
@@ -73,8 +74,7 @@ const Hompage = () => {
           {/* <Post />
           <Post />
           <Post /> */}
-
-          <PostCard
+          <Post
             author={{ name: "hmquandec", avatar: "path_to_avatar.jpg" }}
             time="2 ngày"
             content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt culpa deleniti vel neque! Saepe modi totam possimus? Quaerat, mollitia perferendis corporis iure delectus, ratione veniam, expedita corrupti aliquid veritatis sed?"
@@ -84,7 +84,7 @@ const Hompage = () => {
             shares={2}
           />
 
-          {/* <PostCard
+          <Post
             author={{ name: "hmquandec", avatar: "path_to_avatar.jpg" }}
             time="2 ngày"
             content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt culpa deleniti vel neque! Saepe modi totam possimus? Quaerat, mollitia perferendis corporis iure delectus, ratione veniam, expedita corrupti aliquid veritatis sed?"
@@ -92,7 +92,7 @@ const Hompage = () => {
             likes={12}
             comments={[]}
             shares={2}
-          /> */}
+          />
         </ContentContainer>
       </HompageContainer>
     </Layout>
