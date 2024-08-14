@@ -61,7 +61,7 @@ const HompageContainer = styled.div`
 
 const ContentContainer = styled.div`
   min-height: 100vh;
-  width: 100%;
+  min-width: 100%;
 `;
 
 const Hompage = () => {
