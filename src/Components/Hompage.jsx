@@ -1,52 +1,12 @@
-// import React from "react";
-// import Post from "./Cards/Post";
-// import styled from "styled-components";
-// import SlideImage from "./Cards/SlideImage";
-// import SocialMediaPost from "./Cards/tmp";
-
-// const HompageContainer = styled.div`
-//   // max-width: 100%;
-// `;
-
-// // const postData = {
-// //   username: "hmquandec",
-// //   avatarUrl:
-// //     "https://ytclonebynhat.s3.ap-southeast-1.amazonaws.com/dd314055-8291-4fe5-be6e-e9e2581db5d5JPG",
-// //   timestamp: "2 ngày",
-// //   content:
-// //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt culpa deleniti vel neque! Saepe modi totam possimus? Quaerat, mollitia perferendis corporis iure delectus, ratione veniam, expedita corrupti aliquid veritatis sed?",
-// //   imageUrl:
-// //     "https://ytclonebynhat.s3.ap-southeast-1.amazonaws.com/3d879183-417f-4242-a939-4c37dac29eacJPG",
-// //   likes: 12,
-// //   comments: [
-// //     { username: "user1", content: "Great post!" },
-// //     { username: "user2", content: "Nice picture!" },
-// //   ],
-// //   shares: 2,
-// // };
-
-// const Hompage = () => {
-//   return (
-//     <HompageContainer>
-//       <SlideImage />
-//       <Post />
-//       {/* <SocialMediaPost post={postData} /> */}
-//     </HompageContainer>
-//   );
-// };
-
-// export default Hompage;
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./Cards/Post";
 import styled from "styled-components";
 import SlideImage from "./Cards/SlideImage";
-import SocialMediaPost from "./Cards/tmp";
 import Layout from "./Layout/Layout";
-// import Post from "./Cards/Post";
-import testimg from "./Asset/test/HonVuon.jpg";
+import PostForm from "./Form/CreatePost";
+import { getPosts } from "../lib/controller";
 
-const HompageContainer = styled.div`
+const HomepageContainer = styled.div`
   min-width: 100%;
   width: 100%;
   display: flex;
@@ -65,38 +25,68 @@ const ContentContainer = styled.div`
   margin: 0 auto;
 `;
 
-const Hompage = () => {
+const Homepage = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchPosts = async () => {
+    try {
+      setLoading(true);
+      const fetchedPosts = await getPosts();
+      setPosts(fetchedPosts);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const handleNewPost = () => {
+    fetchPosts();
+  };
+
   return (
     <Layout>
-      <HompageContainer>
+      <HomepageContainer>
         <ContentContainer>
           <SlideImage />
-          {/* <Post />
-          <Post />
-          <Post /> */}
-          <Post
-            author={{ name: "hmquandec", avatar: "path_to_avatar.jpg" }}
-            time="2 ngày"
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt culpa deleniti vel neque! Saepe modi totam possimus? Quaerat, mollitia perferendis corporis iure delectus, ratione veniam, expedita corrupti aliquid veritatis sed?"
-            image={testimg}
-            likes={12}
-            comments={[]}
-            shares={2}
+          <PostForm
+            author={{
+              name: "Nhat Nguyen",
+              avatar:
+                "https://firebasestorage.googleapis.com/v0/b/trip-wanderer-2b9d3.appspot.com/o/IMG_4671%202.JPG?alt=media&token=2a664623-09dd-4d3a-9e14-ca76efaa19e8",
+            }}
+            onPostCreated={handleNewPost}
           />
-
-          <Post
-            author={{ name: "hmquandec", avatar: "path_to_avatar.jpg" }}
-            time="2 ngày"
-            content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt culpa deleniti vel neque! Saepe modi totam possimus? Quaerat, mollitia perferendis corporis iure delectus, ratione veniam, expedita corrupti aliquid veritatis sed?"
-            image={testimg}
-            likes={12}
-            comments={[]}
-            shares={2}
-          />
+          {loading ? (
+            <p>Đang tải bài viết...</p>
+          ) : (
+            posts.map((post) => (
+              <Post
+                key={post.id}
+                id={post.id}
+                author={post.author}
+                time={
+                  post.createdAt
+                    ? new Date(post.createdAt.seconds * 1000).toLocaleString()
+                    : "Unknown time"
+                }
+                content={post.content}
+                image={post.imageUrl}
+                likes={post.likes}
+                comments={post.comments}
+                shares={post.shares}
+              />
+            ))
+          )}
         </ContentContainer>
-      </HompageContainer>
+      </HomepageContainer>
     </Layout>
   );
 };
 
-export default Hompage;
+export default Homepage;
