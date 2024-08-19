@@ -289,14 +289,6 @@ const Rating = styled.div`
   }
 `;
 
-const imageUrls = [
-  "https://picsum.photos/id/1018/1000/600/",
-  "https://picsum.photos/id/1015/1000/600/",
-  "https://picsum.photos/id/1021/1000/600/",
-  "https://picsum.photos/id/1025/1000/600/",
-  "https://picsum.photos/id/1035/1000/600/",
-  "https://picsum.photos/id/1050/1000/600/",
-];
 const TripComponent = ({ trip }) => {
   return (
     <TripDetailContainer>
@@ -319,13 +311,13 @@ const TripComponent = ({ trip }) => {
           </TripActions>
         </TripMeta>
       </TripHeader>
-      <Gallery images={imageUrls} />
+      <Gallery images={trip.thumbnail} />
       <InfoContainer>
         <UserContainer>
           <UserInfo>
-            <UserAvatar src="https://via.placeholder.com/40" alt="Bich Ngoc" />
+            <UserAvatar src={trip.author.avatar} alt="Bich Ngoc" />
             <UserDetails>
-              <UserName>Bich Ngoc</UserName>
+              <UserName>{trip.author.name}</UserName>
               <UserRole>Trip maker</UserRole>
             </UserDetails>
           </UserInfo>
