@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Nav from "./Nav";
 import LeftSildeBar from "./LeftSildeBar";
 import RightSlidebar from "./RightSlideBar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,6 +15,7 @@ const LayoutContainer = styled.div`
 `;
 
 const Content = styled.div`
+  overflow-y: auto;
   display: flex;
   flex: 1;
   overflow: hidden;

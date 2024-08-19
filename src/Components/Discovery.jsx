@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Layout from "./Layout/Layout";
+import TripCard from "./Cards/Trip";
+import Gallery from "./Cards/tmp";
 
 // Styled Components
 const Header = styled.header`
@@ -139,7 +141,73 @@ const Discovery = () => {
       </Header>
       <Main>
         <ImageGrid>
-          {destinations.map((destination, index) => (
+          <TripCard
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
+            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
+            rating={99}
+            distance={5}
+            duration="Trong ngày"
+            author={{
+              name: "Nhat Nguyen",
+              avatarUrl:
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
+            }}
+            isFree={true}
+          />
+
+          <TripCard
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
+            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
+            rating={99}
+            distance={5}
+            duration="Trong ngày"
+            author={{
+              name: "Nhat Nguyen",
+              avatarUrl:
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
+            }}
+            isFree={true}
+          />
+          <TripCard
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
+            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
+            rating={99}
+            distance={5}
+            duration="Trong ngày"
+            author={{
+              name: "Nhat Nguyen",
+              avatarUrl:
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
+            }}
+            isFree={true}
+          />
+          <TripCard
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
+            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
+            rating={99}
+            distance={5}
+            duration="Trong ngày"
+            author={{
+              name: "Nhat Nguyen",
+              avatarUrl:
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
+            }}
+            isFree={true}
+          />
+          <TripCard
+            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
+            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
+            rating={99}
+            distance={5}
+            duration="Trong ngày"
+            author={{
+              name: "Nhat Nguyen",
+              avatarUrl:
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
+            }}
+            isFree={true}
+          />
+          {/* {destinations.map((destination, index) => (
             <DestinationBox key={index}>
               <img src={destination.image} alt={destination.name} />
               <div className="overlay">
@@ -150,7 +218,7 @@ const Discovery = () => {
                 </div>
               </div>
             </DestinationBox>
-          ))}
+          ))} */}
         </ImageGrid>
       </Main>
       <Footer>&copy; 2023 TripWanderer. All rights reserved.</Footer>

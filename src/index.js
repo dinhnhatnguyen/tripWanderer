@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Nav from "./Components/Layout/Nav";
+import LoginPage from "./Components/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <BrowserRouter>
       <Nav />
       <App />
+      {/* <LoginPage /> */}
       {/* <Layout>
         <App />
       </Layout> */}

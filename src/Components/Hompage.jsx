@@ -58,7 +58,7 @@ const Homepage = () => {
             author={{
               name: "Nhat Nguyen",
               avatar:
-                "https://firebasestorage.googleapis.com/v0/b/trip-wanderer-2b9d3.appspot.com/o/IMG_4671%202.JPG?alt=media&token=2a664623-09dd-4d3a-9e14-ca76efaa19e8",
+                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
             }}
             onPostCreated={handleNewPost}
           />

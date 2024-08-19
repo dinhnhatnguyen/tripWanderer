@@ -12,9 +12,10 @@ const Card = styled.div`
 `;
 
 const PostImage = styled.img`
-  width: 100%;
+  width: 700px;
   height: auto;
-  border-radius: 0 0 10px 10px;
+  margin: 0 auto;
+  border-radius: 10px;
 `;
 
 const ActionButton = styled.button`
