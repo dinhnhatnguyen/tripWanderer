@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapMarkerAlt, faCircle } from "@fortawesome/free-solid-svg-icons";
-import Gallery from "./Cards/Gallery";
+import Gallery from "./Gallery";
 
 const TripDetailContainer = styled.div`
   max-width: 1280px;
@@ -374,7 +372,8 @@ const TripComponent = ({ trip }) => {
               {dayPlan.activities.map((activity, idx) => (
                 <TimeLineItem key={idx}>
                   <Thumnails
-                    src="https://via.placeholder.com/50"
+                    // src="https://via.placeholder.com/50"
+                    src={trip.thumbnail[0]}
                     alt="thumnails"
                   />
                   <TextContainer>

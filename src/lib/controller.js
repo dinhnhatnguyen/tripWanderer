@@ -17,6 +17,7 @@ import {
 
 const storage = getStorage(app);
 const db = getFirestore(app);
+export const fireStore = getFirestore(app);
 
 // FOR HOME PAGE
 export const uploadPost = async (content, imageFile, author) => {

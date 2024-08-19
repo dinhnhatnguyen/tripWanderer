@@ -112,11 +112,8 @@ const FreeTag = styled.span`
 // };
 
 const TripCard = ({ trip }) => {
-  // Nhận đúng tên đối tượng prop
-  const { id } = useParams();
-
   return (
-    <CardLink to={`/tripdetails/${id}`} className="card">
+    <CardLink to={`/tripdetails/${trip.id}`} className="card">
       <Image
         src={trip.thumbnail[0]} // Đảm bảo tên đúng là thumbnail
         className="card-img-top"

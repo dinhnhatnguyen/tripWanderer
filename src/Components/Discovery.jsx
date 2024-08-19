@@ -96,7 +96,7 @@ const Discovery = () => {
     fetchTrips(); // Gọi hàm fetchTrips khi component được mount
   }, []);
 
-  console.log(trips[0]);
+  console.log(trips);
   if (loading) {
     return <div>Đang tải...</div>; // Hiển thị loading khi dữ liệu đang được tải
   }
