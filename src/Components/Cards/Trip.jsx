@@ -6,7 +6,7 @@ import {
   faLocationDot,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const CardLink = styled(Link)`
   text-decoration: none;
@@ -70,7 +70,6 @@ const Avatar = styled.img`
 `;
 
 const FreeTag = styled.span`
-  // background-color: #28a745;
   color: #046cb8;
   padding: 2px 8px;
   border-radius: 4px;
@@ -79,37 +78,67 @@ const FreeTag = styled.span`
   margin-left: auto;
 `;
 
-const TripCard = ({
-  id,
-  imageUrl,
-  title,
-  rating,
-  distance,
-  duration,
-  author,
-  isFree,
-}) => {
+// const TripCard = ({ props }) => {
+//   const { id } = useParams();
+//   return (
+//     <CardLink to={`/tripdetails/${id}`} className="card">
+//       <Image
+//         src={props.thumnail[0]}
+//         className="card-img-top"
+//         alt="Trip location"
+//       />
+//       <Content className="card-body">
+//         <Title className="card-title">{props.title}</Title>
+//         <Infor>
+//           <InfoItem>
+//             <Icon icon={faSmile} /> {props.rating.score}%
+//           </InfoItem>
+//           <InfoItem>
+//             <Icon icon={faLocationDot} /> {props.distance} km
+//           </InfoItem>
+//           <InfoItem>
+//             <Icon icon={faClock} /> {props.time}
+//           </InfoItem>
+//         </Infor>
+
+//         <Author>
+//           <Avatar src={props.author.avatar} alt={props.author.name} />
+//           <span>{props.author.name}</span>
+//           {/* {isFree && <FreeTag>FREE</FreeTag>} */}
+//         </Author>
+//       </Content>
+//     </CardLink>
+//   );
+// };
+
+const TripCard = ({ trip }) => {
+  // Nhận đúng tên đối tượng prop
+  const { id } = useParams();
+
   return (
     <CardLink to={`/tripdetails/${id}`} className="card">
-      <Image src={imageUrl} className="card-img-top" alt="Trip location" />
+      <Image
+        src={trip.thumbnail[0]} // Đảm bảo tên đúng là thumbnail
+        className="card-img-top"
+        alt="Trip location"
+      />
       <Content className="card-body">
-        <Title className="card-title">{title}</Title>
+        <Title className="card-title">{trip.title}</Title>
         <Infor>
           <InfoItem>
-            <Icon icon={faSmile} /> {rating}%
+            <Icon icon={faSmile} /> {trip.rating.score}%
           </InfoItem>
           <InfoItem>
-            <Icon icon={faLocationDot} /> {distance} km
+            <Icon icon={faLocationDot} /> {trip.distance}
           </InfoItem>
           <InfoItem>
-            <Icon icon={faClock} /> {duration}
+            <Icon icon={faClock} /> {trip.time}
           </InfoItem>
         </Infor>
-
         <Author>
-          <Avatar src={author.avatarUrl} alt={author.name} />
-          <span>{author.name}</span>
-          {isFree && <FreeTag>FREE</FreeTag>}
+          <Avatar src={trip.author.avatar} alt={trip.author.name} />
+          <span>{trip.author.name}</span>
+          {/* {isFree && <FreeTag>FREE</FreeTag>} */}
         </Author>
       </Content>
     </CardLink>

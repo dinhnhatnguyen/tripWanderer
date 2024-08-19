@@ -18,6 +18,7 @@ import {
 const storage = getStorage(app);
 const db = getFirestore(app);
 
+// FOR HOME PAGE
 export const uploadPost = async (content, imageFile, author) => {
   try {
     let imageUrl = null;
@@ -106,6 +107,23 @@ export const addComment = async (postId, comment) => {
     });
   } catch (error) {
     console.error("Error adding comment: ", error);
+    throw error;
+  }
+};
+
+//FOR DISCOVERY PAGE
+
+export const getTrips = async () => {
+  try {
+    const tripsRef = collection(db, "trips");
+    const q = query(tripsRef, orderBy("id", "desc"));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Error getting posts: ", error);
     throw error;
   }
 };

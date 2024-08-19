@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Layout from "./Layout/Layout";
 import TripCard from "./Cards/Trip";
 import Gallery from "./Cards/tmp";
+import { getTrips } from "../lib/controller";
 
 // Styled Components
 const Header = styled.header`
@@ -77,62 +78,32 @@ const Footer = styled.footer`
 
 // Component
 const Discovery = () => {
-  // Dummy data
-  const destinations = [
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
+  const [trips, setTrips] = useState([]); // State lưu trữ danh sách trips
+  const [loading, setLoading] = useState(true); // State để theo dõi trạng thái tải
 
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        const tripsData = await getTrips(); // Gọi hàm getTrips để lấy dữ liệu
+        setTrips(tripsData); // Lưu dữ liệu trips vào state
+      } catch (error) {
+        console.error("Error fetching trips: ", error);
+      } finally {
+        setLoading(false); // Đặt loading thành false sau khi dữ liệu được tải xong
+      }
+    };
 
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
-    {
-      image:
-        "https://imgg.stripical.xyz/Bycq441-jwe0dpm5XfD_l-fYC7U=/500x/img.stripical.xyz/trip/6454b6dc40995f7e90fdcd5a/D01CF",
-      name: "Nha Trang",
-      price: "$ 199",
-    },
+    fetchTrips(); // Gọi hàm fetchTrips khi component được mount
+  }, []);
 
-    // Add more destination objects
-  ];
+  console.log(trips[0]);
+  if (loading) {
+    return <div>Đang tải...</div>; // Hiển thị loading khi dữ liệu đang được tải
+  }
 
+  // const handleNewTrip = () => {
+  //   fetchTrips();
+  // };
   return (
     <Layout>
       <Header>
@@ -141,7 +112,13 @@ const Discovery = () => {
       </Header>
       <Main>
         <ImageGrid>
-          <TripCard
+          {loading ? (
+            <p>Đang tải bài viết...</p>
+          ) : (
+            trips.map((trip) => <TripCard key={trip.id} trip={trip} />)
+          )}
+
+          {/* <TripCard
             imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
             title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
             rating={99}
@@ -206,7 +183,8 @@ const Discovery = () => {
                 "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
             }}
             isFree={true}
-          />
+          /> */}
+
           {/* {destinations.map((destination, index) => (
             <DestinationBox key={index}>
               <img src={destination.image} alt={destination.name} />

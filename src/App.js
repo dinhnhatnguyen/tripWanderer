@@ -90,7 +90,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Hompage />} />
       <Route path="/discovery" element={<Discovery />} />
-      <Route path="/trip/id" element={<TripDetails trip={trip} />} />
+      <Route path="/tripdetails/:id" element={<TripDetails trip={trip} />} />
+      {/* <Route path="/tripdetails/:id" element={<TripDetails trip={trip} />} /> */}
     </Routes>
   );
 }
