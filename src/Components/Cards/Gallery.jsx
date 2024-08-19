@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const GalleryContainer = styled.div`
-  border-radius: 10px;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,13 +39,13 @@ const GalleryContainer = styled.div`
   .gallery-item {
     position: relative;
     cursor: pointer;
-    width: 100%; /* Make sure the item occupies the full width of its grid cell */
-    height: 100%; /* Ensures that the image covers the entire grid cell */
+    width: 100%;
+    height: 100%;
 
     img {
       width: 100%;
-      height: 100%; /* Ensure the image takes up the full area of the item */
-      object-fit: cover; /* Ensure the image covers the entire area without stretching */
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -56,16 +57,7 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const Gallery = () => {
-  const [images] = useState([
-    "https://picsum.photos/id/1018/1000/600/",
-    "https://picsum.photos/id/1015/1000/600/",
-    "https://picsum.photos/id/1021/1000/600/",
-    "https://picsum.photos/id/1025/1000/600/",
-    "https://picsum.photos/id/1035/1000/600/",
-    "https://picsum.photos/id/1050/1000/600/",
-  ]);
-
+const Gallery = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
@@ -186,6 +178,10 @@ const Gallery = () => {
       )}
     </div>
   );
+};
+
+Gallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Gallery;

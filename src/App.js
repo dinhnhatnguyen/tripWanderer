@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Hompage from "./Components/Hompage";
 import Discovery from "./Components/Discovery";
-import Layout from "./Components/Layout/Layout";
 import TripDetails from "./Components/TripDetails";
 
 function App() {
@@ -24,12 +23,14 @@ function App() {
         day: 1,
         activities: [
           { time: "11:30", description: "Hoạt động tại điểm đến ngày 1" },
+          { time: "2:30", description: "Hoạt động tại điểm đến ngày 1" },
         ],
       },
       {
         day: 2,
         activities: [
           { time: "18:30", description: "Hoạt động tại điểm đến ngày 2" },
+          { time: "20:30", description: "Hoạt động tại điểm đến ngày 2" },
         ],
       },
       {

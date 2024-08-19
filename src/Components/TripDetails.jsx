@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt, faCircle } from "@fortawesome/free-solid-svg-icons";
 import Gallery from "./Cards/Gallery";
 
 const TripDetailContainer = styled.div`
@@ -28,13 +30,14 @@ const TripMeta = styled.div`
 
 const TripRating = styled.div`
   font-size: 0.9rem;
+  color: #6c757d;
 `;
 
 const TripActions = styled.div`
   button {
     background: none;
     border: none;
-    color: #007bff;
+    color: #6c757d;
     margin-left: 10px;
   }
 `;
@@ -93,22 +96,26 @@ const UserRole = styled.span`
 `;
 
 const UserActions = styled.div`
+  padding-right: 100px;
   display: flex;
-  gap: 8px;
+  gap: 10px;
 `;
 
 const UserActionButton = styled.button`
-  background-color: ${(props) => (props.primary ? "#e0e0e0" : "white")};
+  background-color: #e0e0e0;
   color: ${(props) => (props.primary ? "black" : "#666")};
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
+  border: 2px solid #e0e0e0;
+  background-color: #e0e0e0;
+  border-radius: 10px;
   padding: 6px 12px;
   font-size: 0.8rem;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
-
+  width: 120px;
+  height: 40px;
   &:hover {
-    background-color: ${(props) => (props.primary ? "#d0d0d0" : "#f0f0f0")};
+    background-color: #d0d0d0;
   }
 `;
 const PriceContainer = styled.div`
@@ -117,24 +124,29 @@ const PriceContainer = styled.div`
   box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3);
   padding: 15px;
   width: 35%;
-  text-align: center;
+  text-align: start;
 `;
 const Price = styled.div`
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #28a745;
+  color: #000;
   margin-bottom: 10px;
 `;
 
 const BuyButton = styled.button`
-  background-color: #007bff;
+  background-color: #046cb8;
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
   border-radius: 4px;
   width: 100%;
+
+  &:hover {
+    background-color: #00518c;
+  }
 `;
 
 const SocialActions = styled.div`
@@ -143,41 +155,148 @@ const SocialActions = styled.div`
   justify-content: space-between;
   width: 200px;
   gap: 0.5em;
-  padding: 0.5em;
+  padding: 0 1.5em;
   border-left: 2px solid #d0d0d0;
 `;
 
 const SocialButton = styled.button`
-  // background: none;
-  // border: none;
-  // color: #007bff;
-  // cursor: pointer;
-  // font-size: 0.9rem;
-  background-color: ${(props) => (props.primary ? "#e0e0e0" : "white")};
-  color: ${(props) => (props.primary ? "black" : "#046cb8")};
+  background-color: #fff;
+  color: #046cb8;
   border: 2px solid #046cb8;
   border-radius: 10px;
   padding: 6px 12px;
   font-size: 0.8rem;
-  font-weight: 0.8rem;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${(props) => (props.primary ? "#d0d0d0" : "#f0f0f0")};
+    background-color: #d0d0d0;
   }
 `;
 
 const TripSection = styled.div`
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
 const SectionTitle = styled.h2`
   font-size: 1.2rem;
+  font-weight: bold;
   margin-bottom: 10px;
+  padding-left: 15px;
+  border-left: #046cb8 solid 4px;
 `;
 
+const LocalList = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: space-around;
+  margin-top: 20px;
+`;
+const LocalItem = styled.h4`
+  width: 120px;
+  height: 40px;
+  border-radius: 50px;
+  background-color: #e1e1e1;
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+  justify-content: space-around;
+  font-size: 2px;
+  &:not(:first-child) {
+    margin-left: 20px;
+  }
+  &:hover {
+    background-color: #046cb8;
+    color: #e1e1e1;
+  }
+`;
+
+const Map = styled.div`
+  width: 1200px;
+  height: 600px;
+  background-color: #666;
+  border-radius: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .h1 {
+    margin: auto;
+  }
+`;
+
+const TimeLine = styled.div`
+  display: flex;
+  margin-top: 20px;
+  .ActivitiesContainer {
+    display: flex;
+  }
+  .ActivitiesContainer > *:not(:first-child) {
+    margin-left: 20px;
+  }
+  .ActivitiesContainer:not(:first-child) {
+    margin-left: 20px;
+  }
+`;
+const TimeLineItem = styled.div`
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 60px;
+  background-color: #d0d0d0;
+  border-radius: 20px;
+  &:hover {
+    background-color: #d9e8f7;
+  }
+`;
+
+const Thumnails = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 5px;
+  margin-right: 5px
+  overflow: hidden;
+`;
+
+const TextContainer = styled.div`
+  margin-left: 10px;
+`;
+
+const Title = styled.div`
+  font-size: 10px;
+  font-weight: bold;
+  color: #000;
+`;
+
+const Subtitle = styled.div`
+  font-size: 8px;
+  color: #555;
+`;
+
+const Rating = styled.div`
+  margin-bottom: 20px;
+  margin-top: 50px;
+  display: flex;
+  p {
+    align-items: center;
+    color: #046cb8;
+    font-weight: bold;
+    margin-top: 3px;
+    padding-left: 20px;
+  }
+`;
+
+const imageUrls = [
+  "https://picsum.photos/id/1018/1000/600/",
+  "https://picsum.photos/id/1015/1000/600/",
+  "https://picsum.photos/id/1021/1000/600/",
+  "https://picsum.photos/id/1025/1000/600/",
+  "https://picsum.photos/id/1035/1000/600/",
+  "https://picsum.photos/id/1050/1000/600/",
+];
 const TripComponent = ({ trip }) => {
   return (
     <TripDetailContainer>
@@ -185,34 +304,23 @@ const TripComponent = ({ trip }) => {
         <TripTitle>{trip.title}</TripTitle>
         <TripMeta>
           <TripRating>
-            <i className="fa-solid fa-star"></i> {trip.rating.score}% (
-            {trip.rating.count} đánh giá) • {trip.local}
+            <i className="fa-solid fa-face-smile"></i> {trip.rating.score}% (
+            {trip.rating.count} đánh giá){" "}
+            <i className="fa-solid fa-location-dot"></i> {"  "}
+            {trip.local}
           </TripRating>
           <TripActions>
-            <button>Yêu thích</button>
-            <button>Chia sẻ</button>
+            <button>
+              <i class="fa-solid fa-heart"></i> Yêu thích
+            </button>
+            <button>
+              <i class="fa-solid fa-share"></i> Chia sẻ
+            </button>
           </TripActions>
         </TripMeta>
       </TripHeader>
-      <Gallery />
+      <Gallery images={imageUrls} />
       <InfoContainer>
-        {/* <UserContainer>
-          <UserInfo>
-            <UserAvatar src="https://via.placeholder.com/50" alt="Bich Ngoc" />
-            <UserDetails>
-              <UserName>Bich Ngoc</UserName>
-              <UserRole>Trip maker</UserRole>
-            </UserDetails>
-          </UserInfo>
-          <UserActions>
-            <UserActionButton>Theo dõi</UserActionButton>
-            <UserActionButton>Nhắn tin</UserActionButton>
-          </UserActions>
-          <UpdateInfo>
-            <i className="fas fa-clock"></i> Cập nhật lần cuối: 16 tháng 6, 2024
-          </UpdateInfo>
-        </UserContainer> */}
-
         <UserContainer>
           <UserInfo>
             <UserAvatar src="https://via.placeholder.com/40" alt="Bich Ngoc" />
@@ -254,17 +362,61 @@ const TripComponent = ({ trip }) => {
 
       <TripSection>
         <SectionTitle>Thông tin hành trình</SectionTitle>
-        {trip.itinerary.map((day, index) => (
-          <div key={index}>
-            <h3>Ngày {day.day}</h3>
-            {day.activities.map((activity, idx) => (
-              <div key={idx}>
-                <span>{activity.time}</span> -{" "}
-                <span>{activity.description}</span>
-              </div>
-            ))}
-          </div>
-        ))}
+        <LocalList>
+          {trip.itinerary.map((day, index) => (
+            <LocalItem key={index}>
+              <h4>Ngày {day.day}</h4>
+            </LocalItem>
+          ))}
+        </LocalList>
+        <Map>
+          <h1>Sau này sẽ tích hợp bản đồ ở đây</h1>
+        </Map>
+      </TripSection>
+
+      <TripSection>
+        <SectionTitle>Chi tiết lịch trình</SectionTitle>
+        <TimeLine>
+          {trip.itinerary.map((dayPlan, index) => (
+            <div className="ActivitiesContainer" key={index}>
+              {dayPlan.activities.map((activity, idx) => (
+                <TimeLineItem key={idx}>
+                  <Thumnails
+                    src="https://via.placeholder.com/50"
+                    alt="thumnails"
+                  />
+                  <TextContainer>
+                    <Title>Day {dayPlan.day}</Title>
+                    <Subtitle>{activity.description}</Subtitle>
+                    <Subtitle>{`${activity.time} - Day ${dayPlan.day}`}</Subtitle>
+                  </TextContainer>
+                </TimeLineItem>
+              ))}
+            </div>
+          ))}
+        </TimeLine>
+      </TripSection>
+
+      <TripSection>
+        <SectionTitle>Chi tiết lịch trình</SectionTitle>
+      </TripSection>
+
+      <Rating>
+        <SectionTitle>Đánh giá</SectionTitle>
+        <TripRating>
+          <p>
+            <i className="fa-solid fa-face-smile"></i> {trip.rating.score}% (
+            {trip.rating.count} đánh giá)
+          </p>
+        </TripRating>
+      </Rating>
+
+      <TripSection>
+        <SectionTitle>Những điều cần lưu ý</SectionTitle>
+      </TripSection>
+
+      <TripSection>
+        <SectionTitle>Lịch trình liên quan</SectionTitle>
       </TripSection>
     </TripDetailContainer>
   );
