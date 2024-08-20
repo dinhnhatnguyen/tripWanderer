@@ -3,70 +3,20 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Layout from "./Layout/Layout";
-import TripCard from "./Cards/Trip";
+import TripCard from "./Cards/TripCard";
 import Gallery from "./Cards/tmp";
 import { getTrips } from "../lib/controller";
-
-// Styled Components
-const Header = styled.header`
-  background-color: #0077b6;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
-`;
+import ImageUpload from "./Cards/ImageUpload";
+import SearchTrip from "./Form/SearchTrip";
 
 const Main = styled.main`
-  padding: 2rem;
+  padding: 20px;
 `;
 
 const ImageGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
-`;
-
-const DestinationBox = styled.div`
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-  .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 1rem;
-  }
-
-  .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #0077b6;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-      background-color: #005a8c;
-    }
-  }
 `;
 
 const Footer = styled.footer`
@@ -76,7 +26,41 @@ const Footer = styled.footer`
   font-size: 0.9rem;
 `;
 
-// Component
+const Banner = styled.div`
+  width: 100%;
+  height: 285px;
+  display: flex;
+  color: #fff;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/wallpaperflare.com_wallpaper%20(1).jpg?alt=media&token=39d0f1b6-83e2-4df1-a55e-5e2226ff80e6");
+`;
+const TitleContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 612px;
+  max-height: 180px;
+  margin: 0 auto;
+  border-radius: 20px;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+
+  h1 {
+    color: #046cb8;
+    font-weight: bold;
+  }
+
+  p {
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+`;
+
 const Discovery = () => {
   const [trips, setTrips] = useState([]); // State lưu trữ danh sách trips
   const [loading, setLoading] = useState(true); // State để theo dõi trạng thái tải
@@ -101,15 +85,16 @@ const Discovery = () => {
     return <div>Đang tải...</div>; // Hiển thị loading khi dữ liệu đang được tải
   }
 
-  // const handleNewTrip = () => {
-  //   fetchTrips();
-  // };
   return (
     <Layout>
-      <Header>
-        <h1>Xin chào!</h1>
-        <p>Khám phá những chuyến đi tuyệt vời cùng TripWanderer</p>
-      </Header>
+      <Banner>
+        <TitleContainer>
+          <h1>Xin chào!</h1>
+          <p>Khám phá những chuyến đi tuyệt vời cùng TripWanderer</p>
+          <SearchTrip />
+        </TitleContainer>
+      </Banner>
+
       <Main>
         <ImageGrid>
           {loading ? (
@@ -117,86 +102,6 @@ const Discovery = () => {
           ) : (
             trips.map((trip) => <TripCard key={trip.id} trip={trip} />)
           )}
-
-          {/* <TripCard
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
-            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
-            rating={99}
-            distance={5}
-            duration="Trong ngày"
-            author={{
-              name: "Nhat Nguyen",
-              avatarUrl:
-                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
-            }}
-            isFree={true}
-          />
-
-          <TripCard
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
-            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
-            rating={99}
-            distance={5}
-            duration="Trong ngày"
-            author={{
-              name: "Nhat Nguyen",
-              avatarUrl:
-                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
-            }}
-            isFree={true}
-          />
-          <TripCard
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
-            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
-            rating={99}
-            distance={5}
-            duration="Trong ngày"
-            author={{
-              name: "Nhat Nguyen",
-              avatarUrl:
-                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
-            }}
-            isFree={true}
-          />
-          <TripCard
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
-            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
-            rating={99}
-            distance={5}
-            duration="Trong ngày"
-            author={{
-              name: "Nhat Nguyen",
-              avatarUrl:
-                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
-            }}
-            isFree={true}
-          />
-          <TripCard
-            imageUrl="https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/posts%2F1723682298797_IMG_8741.JPG?alt=media&token=ead58352-2e26-4c1a-8068-b6c92430cd82"
-            title="Nửa ngày ở Hạ Long thì làm gì? Chill Beach Bar siêu cuố..."
-            rating={99}
-            distance={5}
-            duration="Trong ngày"
-            author={{
-              name: "Nhat Nguyen",
-              avatarUrl:
-                "https://firebasestorage.googleapis.com/v0/b/tripwanderer-f58d6.appspot.com/o/IMG_4671%202.JPG?alt=media&token=03a3180d-a4e0-4cb7-9117-1b24da600fab",
-            }}
-            isFree={true}
-          /> */}
-
-          {/* {destinations.map((destination, index) => (
-            <DestinationBox key={index}>
-              <img src={destination.image} alt={destination.name} />
-              <div className="overlay">
-                <div className="price">{destination.price}</div>
-                <div className="button">
-                  Đặt ngay
-                  <FontAwesomeIcon icon={faChevronRight} />
-                </div>
-              </div>
-            </DestinationBox>
-          ))} */}
         </ImageGrid>
       </Main>
       <Footer>&copy; 2023 TripWanderer. All rights reserved.</Footer>

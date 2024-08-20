@@ -295,7 +295,7 @@ const TripComponent = ({ trip }) => {
         <TripMeta>
           <TripRating>
             <i className="fa-solid fa-face-smile"></i> {trip.rating.score}% (
-            {trip.rating.count} đánh giá){" "}
+            {trip.rating.count} đánh giá){"    "}
             <i className="fa-solid fa-location-dot"></i> {"  "}
             {trip.local}
           </TripRating>
