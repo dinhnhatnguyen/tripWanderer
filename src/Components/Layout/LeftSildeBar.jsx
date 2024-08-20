@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faWallet } from "@fortawesome/free-solid-svg-icons/faWallet";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons/faCircleExclamation";
+import { useLocation } from "react-router-dom";
 
 const SidebarContainer = styled.div`
   max-width: 260px;
@@ -82,13 +83,19 @@ const FollowingHeader = styled.div`
 `;
 
 const LeftSildeBar = () => {
+  const location = useLocation();
+  const currentUrl = location.pathname;
+
   return (
     <SidebarContainer>
       <Section>
-        <MenuItem href="/" className="active">
+        <MenuItem href="/" className={currentUrl === "/" ? "active" : ""}>
           <MenuIcon icon={faHome} /> Trang chủ
         </MenuItem>
-        <MenuItem href="/discovery">
+        <MenuItem
+          href="/discovery"
+          className={currentUrl === "/discovery" ? "active" : ""}
+        >
           <MenuIcon icon={faCompass} /> Khám phá
         </MenuItem>
         <MenuItem href="">
