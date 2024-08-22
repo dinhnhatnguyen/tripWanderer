@@ -129,6 +129,33 @@ const UserInfo = styled.div`
   }
 `;
 
+const NavbarButton = styled.div`
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+`;
+
+const NavbarButtonItem = styled.a`
+  isplay: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 5px;
+  background-color: #046cb8;
+  margin: 10px;
+  &.active {
+    background-color: #046cb8;
+    color: white;
+    border-radius: 5px;
+  }
+  &:hover {
+    background-color: #00518c;
+    color: white;
+  }
+`;
+
 const Nav = () => {
   return (
     <NavbarContainer>
@@ -155,7 +182,7 @@ const Nav = () => {
             <FontAwesomeIcon icon={faBell} />
           </a>
         </NavbarMenu>
-        <NavbarUser>
+        {/* <NavbarUser>
           <UserAvatar>
             <img src={userAvatar} alt="User Avatar" />
           </UserAvatar>
@@ -163,7 +190,12 @@ const Nav = () => {
             <div className="user-name">Nguyễn Đình Nhật</div>
             <div className="user-role">Trip maker</div>
           </UserInfo>
-        </NavbarUser>
+        </NavbarUser> */}
+
+        <NavbarButton>
+          <NavbarButtonItem href="/login">Đăng nhập</NavbarButtonItem>
+          <NavbarButtonItem href="/signup">Đăng Ký</NavbarButtonItem>
+        </NavbarButton>
       </NavbarHeader>
     </NavbarContainer>
   );

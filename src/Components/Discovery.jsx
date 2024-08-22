@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Layout from "./Layout/Layout";
 import TripCard from "./Cards/TripCard";
 import { getTrips } from "../lib/controller";
+import RecommendPopup from "./Cards/RecommendPopup";
 import SearchComponent from "./Form/SearchComponent";
 
 const Main = styled.main`
@@ -95,7 +96,7 @@ const PageButton = styled.button`
 
 const Ellipsis = styled.span`
   font-size: 16px;
-  color: #046cb8;
+  color: #046cb8
   margin: 0 10px;
 `;
 
@@ -105,6 +106,7 @@ const Discovery = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const tripsPerPage = 20;
+  const [isPopupVisible, setPopupVisible] = useState(false);
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -223,6 +225,8 @@ const Discovery = () => {
           </PageButton>
         </PaginationContainer>
       </Main>
+
+      <RecommendPopup isVisible={isPopupVisible} onClose={handleClosePopup} />
     </Layout>
   );
 };
