@@ -1,172 +1,195 @@
-// import React, { useState } from "react";
+// import React, { useEffect, useState } from "react";
+// import "./Weather.css";
+// import clear_icon from "../Asset/WeatherIcon/clear.png";
+// import cloud_icon from "../Asset/WeatherIcon/cloud.png";
+// import drizzle_icon from "../Asset/WeatherIcon/drizzle.png";
+// import humidity_icon from "../Asset/WeatherIcon/humidity.png";
+// import rain_icon from "../Asset/WeatherIcon/rain.png";
+// import snow_icon from "../Asset/WeatherIcon/snow.png";
+// import wind_icon from "../Asset/WeatherIcon/wind.png";
 // import styled from "styled-components";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-// const GalleryContainer = styled.div`
+// const WeatherContainer = styled.div`
+//   place-self: center;
+//   margin: 0 auto;
+//   width: 175px;
+//   height: auto;
+//   padding: 15px;
+//   border-radius: 10px;
+//   background-image: linear-gradient(45deg, #2f4680, #500ae4);
 //   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   .gallery-item {
-//     position: relative;
-//     margin: 5px;
-//     cursor: pointer;
-
-//     img {
-//       width: 100%;
-//       height: auto;
-//       border-radius: 8px;
-//     }
-//   }
-
-//   &.grid {
-//     display: grid;
-//     grid-template-columns: 2fr 1fr;
-//     gap: 10px;
-
-//     .gallery-item:first-child {
-//       grid-row: span 2;
-//     }
-//   }
-
-//   .d-none {
-//     display: none !important;
-//   }
+//   flex-direction: column;
+//   justify-self: center;
+//   align-self: center;
+//   text-align: center;
 // `;
 
-// const Gallery = () => {
-//   const [images] = useState([
-//     "https://picsum.photos/id/1018/1000/600/",
-//     "https://picsum.photos/id/1015/1000/600/",
-//     "https://picsum.photos/id/1021/1000/600/",
-//     "https://picsum.photos/id/1025/1000/600/",
-//     "https://picsum.photos/id/1035/1000/600/",
-//     "https://picsum.photos/id/1050/1000/600/",
-//   ]);
+// const SearchBar = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 12px;
+// `;
 
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [showModal, setShowModal] = useState(false);
+// const SearchInput = styled.input`
+//   width: 80%;
+//   height: 20px;
+//   border: none;
+//   outline: none;
+//   border-radius: 40px;
+//   color: #626262;
+//   background: #ebfffc;
+//   font-size: 10px;
+// `;
 
-//   const handleClick = (index) => {
-//     setCurrentIndex(index);
-//     setShowModal(true);
+// const SearchIcon = styled.i`
+//   width: 20%;
+//   height: 20px;
+//   padding: 6px 9px;
+//   border-radius: 40px;
+//   background: #ebfffc;
+//   font-size: 10px;
+//   cursor: pointer;
+// `;
+
+// const WeatherIcon = styled.img`
+//   width: 100%;
+//   margin: 20px 0;
+// `;
+
+// const Temperature = styled.p`
+//   color: #fff;
+//   font-size: 20px;
+//   font-weight: bold;
+//   line-height: 1;
+// `;
+
+// const Location = styled.p`
+//   color: #fff;
+//   font-size: 10px;
+//   line-height: 1;
+// `;
+
+// const WeatherData = styled.div`
+//   width: 100%;
+//   margin-top: 10px;
+//   color: #fff;
+//   display: flex;
+//   justify-content: space-between;
+// `;
+
+// const DataCol = styled.div`
+//   display: flex;
+//   align-items: flex-start;
+//   gap: 5px;
+//   font-size: 11px;
+// `;
+
+// const DataIcon = styled.img`
+//   width: 15px;
+//   margin-top: 10px;
+// `;
+
+// const DataText = styled.p`
+//   margin: 0;
+// `;
+
+// const DataSpan = styled.span`
+//   display: block;
+//   font-size: 8px;
+// `;
+
+// function Weather() {
+//   const [weatherData, setWeatherData] = useState(null);
+//   const [city, setCity] = useState("London");
+//   const [searchTerm, setSearchTerm] = useState("");
+
+//   const allIcons = {
+//     "01d": clear_icon,
+//     "01n": clear_icon,
+//     "02d": cloud_icon,
+//     "02n": cloud_icon,
+//     "03d": cloud_icon,
+//     "03n": cloud_icon,
+//     "04d": drizzle_icon,
+//     "04n": drizzle_icon,
+//     "09d": rain_icon,
+//     "09n": rain_icon,
+//     "10d": rain_icon,
+//     "10n": rain_icon,
+//     "13d": snow_icon,
+//     "13n": snow_icon,
 //   };
 
-//   const renderGallery = () => {
-//     if (images.length <= 2) {
-//       return (
-//         <GalleryContainer className="d-flex justify-content-center align-items-center">
-//           {images.map((src, index) => (
-//             <div
-//               key={index}
-//               className="gallery-item"
-//               onClick={() => handleClick(index)}
-//             >
-//               <img src={src} alt={`Image ${index + 1}`} />
-//             </div>
-//           ))}
-//         </GalleryContainer>
-//       );
-//     } else {
-//       return (
-//         <GalleryContainer className="gallery grid">
-//           <div className="gallery-item" onClick={() => handleClick(0)}>
-//             <img src={images[0]} alt="Image 1" />
-//           </div>
-//           <div>
-//             <div className="gallery-item" onClick={() => handleClick(1)}>
-//               <img src={images[1]} alt="Image 2" />
-//             </div>
-//             <div className="gallery-item" onClick={() => handleClick(2)}>
-//               <img src={images[2]} alt="Image 3" />
-//             </div>
-//           </div>
-//         </GalleryContainer>
-//       );
+//   const searchWeather = async (city) => {
+//     try {
+//       const apiKey = "bdefef881c1254647fdb351effe30720";
+//       const Url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+//       const response = await fetch(Url);
+//       const data = await response.json();
+
+//       const icon = allIcons[data.weather[0].icon] || clear_icon;
+//       setWeatherData({
+//         humidity: data.main.humidity,
+//         windSpeed: data.wind.speed,
+//         temperature: Math.floor(data.main.temp),
+//         location: data.name,
+//         icon: icon,
+//       });
+//     } catch (error) {
+//       console.error("Error fetching weather data:", error);
 //     }
 //   };
 
+//   const handleSearch = (event) => {
+//     event.preventDefault();
+//     searchWeather(searchTerm);
+//     setCity(searchTerm);
+//     setSearchTerm(""); // Clear the search input after submission
+//   };
+
+//   useEffect(() => {
+//     searchWeather(city);
+//   }, [city]);
+
 //   return (
-//     <div className="container">
-//       {renderGallery()}
+//     <WeatherContainer>
+//       <SearchBar>
+//         <SearchInput
+//           type="text"
+//           placeholder="Search"
+//           value={searchTerm}
+//           onChange={(e) => setSearchTerm(e.target.value)}
+//         />
+//         <SearchIcon className="fas fa-search" onClick={handleSearch} />
+//       </SearchBar>
 
-//       {/* Modal */}
-//       {showModal && (
-//         <div
-//           className="modal fade show d-block"
-//           tabIndex="-1"
-//           role="dialog"
-//           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-//         >
-//           <div
-//             className="modal-dialog modal-dialog-centered modal-lg"
-//             role="document"
-//           >
-//             <div className="modal-content">
-//               <div className="modal-header">
-//                 <button
-//                   type="button"
-//                   className="btn-close"
-//                   aria-label="Close"
-//                   onClick={() => setShowModal(false)}
-//                 ></button>
+//       {weatherData && (
+//         <>
+//           <WeatherIcon src={weatherData.icon} alt="Weather icon" />
+//           <Temperature>{weatherData.temperature}°C</Temperature>
+//           <Location>{weatherData.location}</Location>
+
+//           <WeatherData>
+//             <DataCol>
+//               <DataIcon src={humidity_icon} alt="Humidity icon" />
+//               <div>
+//                 <DataText>{weatherData.humidity} %</DataText>
+//                 <DataSpan>Humidity</DataSpan>
 //               </div>
-//               <div className="modal-body">
-//                 <div
-//                   id="carouselExample"
-//                   className="carousel slide"
-//                   data-bs-ride="carousel"
-//                 >
-//                   <div className="carousel-inner">
-//                     {images.map((src, index) => (
-//                       <div
-//                         key={index}
-//                         className={`carousel-item ${
-//                           index === currentIndex ? "active" : ""
-//                         }`}
-//                       >
-//                         <img
-//                           src={src}
-//                           className="d-block w-100"
-//                           alt={`Image ${index + 1}`}
-//                           style={{ maxHeight: "80vh", objectFit: "cover" }}
-//                         />
-//                       </div>
-//                     ))}
-//                   </div>
-//                   <button
-//                     className="carousel-control-prev"
-//                     type="button"
-//                     data-bs-target="#carouselExample"
-//                     data-bs-slide="prev"
-//                   >
-//                     <span
-//                       className="carousel-control-prev-icon"
-//                       aria-hidden="true"
-//                     ></span>
-//                     <span className="visually-hidden">Previous</span>
-//                   </button>
-//                   <button
-//                     className="carousel-control-next"
-//                     type="button"
-//                     data-bs-target="#carouselExample"
-//                     data-bs-slide="next"
-//                   >
-//                     <span
-//                       className="carousel-control-next-icon"
-//                       aria-hidden="true"
-//                     ></span>
-//                     <span className="visually-hidden">Next</span>
-//                   </button>
-//                 </div>
+//             </DataCol>
+
+//             <DataCol>
+//               <DataIcon src={wind_icon} alt="Wind speed icon" />
+//               <div>
+//                 <DataText>{weatherData.windSpeed} Km/h</DataText>
+//                 <DataSpan>Wind Speed</DataSpan>
 //               </div>
-//             </div>
-//           </div>
-//         </div>
+//             </DataCol>
+//           </WeatherData>
+//         </>
 //       )}
-//     </div>
+//     </WeatherContainer>
 //   );
-// };
+// }
 
-// export default Gallery;
+// export default Weather;

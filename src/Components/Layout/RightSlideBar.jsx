@@ -1,28 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import addImage from "../Asset/image/IMG_0642.jpeg";
+import Weather from "../Cards/Weather";
+import { useLocation } from "react-router-dom";
 
-// const RightSidebarWrapper = styled.aside`
-//   width: 200px;
-//   min-height: 100vh
-//   padding: 20px;
-//   overflow-y: auto;
-//   position: absolute;
-//   right: 0;
-//   top: 65px;
-//   bottom: 0;
-//   background-color: #ffff;
-//   margin-top: 10px;
-// `;
 const RightSidebarWrapper = styled.div`
-  // margin-top: 10px;
-  // position: absolute;
-  // right: 0;
   margin-left: auto;
   top: 65px;
   width: 200px;
   min-height: 100vh;
   background-color: #ffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 const ImageContainer = styled.div`
@@ -36,25 +25,17 @@ const Image = styled.img`
 `;
 
 const RightSlidebar = () => {
+  const location = useLocation();
+  const currentUrl = location.pathname;
   return (
     <RightSidebarWrapper>
       <ImageContainer>
-        <Image src={addImage} alt="Destination 1" />
-      </ImageContainer>
-      <ImageContainer>
-        <Image src={addImage} alt="Destination 2" />
-      </ImageContainer>
-      <ImageContainer>
-        <Image src={addImage} alt="Destination 1" />
-      </ImageContainer>
-      <ImageContainer>
-        <Image src={addImage} alt="Destination 2" />
-      </ImageContainer>
-      <ImageContainer>
-        <Image src={addImage} alt="Destination 1" />
-      </ImageContainer>
-      <ImageContainer>
-        <Image src={addImage} alt="Destination 2" />
+        {currentUrl === "/" ? (
+          <Image src={addImage} alt="Destination 1" />
+        ) : (
+          <Weather />
+        )}
+        {currentUrl === "/" ? <Image src={addImage} alt="Destination 1" /> : ""}
       </ImageContainer>
     </RightSidebarWrapper>
   );

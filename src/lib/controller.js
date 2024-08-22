@@ -76,23 +76,26 @@ export const getPosts = async () => {
     throw error;
   }
 };
-// export const likePost = async (postId) => {
-//   try {
-//     const postRef = doc(db, "posts", postId);
-//     await updateDoc(postRef, {
-//       likes: fire.firestore.FieldValue.increment(1),
-//     });
-//   } catch (error) {
-//     console.error("Error liking post: ", error);
-//     throw error;
-//   }
-// };
+
+// Đoạn code này sẽ gọi hàm để thêm comment vào bài viết
+
+export const unlikePost = async (postId) => {
+  try {
+    const postRef = doc(db, "posts", postId);
+    await updateDoc(postRef, {
+      likes: increment(-1),
+    });
+  } catch (error) {
+    console.error("Error unliking post: ", error);
+    throw error;
+  }
+};
 
 export const likePost = async (postId) => {
   try {
     const postRef = doc(db, "posts", postId);
     await updateDoc(postRef, {
-      likes: increment(1),
+      likes: increment(1), // Tăng số lượng like lên 1
     });
   } catch (error) {
     console.error("Error liking post: ", error);
@@ -104,7 +107,7 @@ export const addComment = async (postId, comment) => {
   try {
     const postRef = doc(db, "posts", postId);
     await updateDoc(postRef, {
-      comments: arrayUnion(comment),
+      comments: arrayUnion(comment), // Thêm comment mới vào mảng comments
     });
   } catch (error) {
     console.error("Error adding comment: ", error);

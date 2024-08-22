@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -158,8 +158,8 @@ const SocialActions = styled.div`
 `;
 
 const SocialButton = styled.button`
-  background-color: #fff;
-  color: #046cb8;
+  background-color: ${(props) => (props.isLike ? "#046cb8" : "#fff")};
+  color: ${(props) => (props.isLike ? "#e1e1e1" : "#046cb8")};
   border: 2px solid #046cb8;
   border-radius: 10px;
   padding: 6px 12px;
@@ -169,7 +169,8 @@ const SocialButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #d0d0d0;
+    background-color: #046cb8;
+    color: #fff;
   }
 `;
 
@@ -202,6 +203,7 @@ const LocalItem = styled.h4`
   padding-top: 5px;
   justify-content: space-around;
   font-size: 2px;
+  cursor: default;
   &:not(:first-child) {
     margin-left: 20px;
   }
@@ -288,6 +290,8 @@ const Rating = styled.div`
 `;
 
 const TripComponent = ({ trip }) => {
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [isLike, setIsLike] = useState(false);
   return (
     <TripDetailContainer>
       <TripHeader>
@@ -320,12 +324,17 @@ const TripComponent = ({ trip }) => {
             </UserDetails>
           </UserInfo>
           <UserActions>
-            <UserActionButton>Theo dõi</UserActionButton>
+            <UserActionButton onClick={() => setIsFollowed(!isFollowed)}>
+              {isFollowed ? "Bỏ theo dõi" : "Theo dõi"}
+            </UserActionButton>
             <UserActionButton>Nhắn tin</UserActionButton>
           </UserActions>
 
           <SocialActions>
-            <SocialButton>Yêu thích</SocialButton>
+            <SocialButton isLike={isLike} onClick={() => setIsLike(!isLike)}>
+              {isLike ? "Bỏ yêu thích" : "Yêu thích"}
+            </SocialButton>
+
             <SocialButton>Chia sẻ</SocialButton>
           </SocialActions>
         </UserContainer>

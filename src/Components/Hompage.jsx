@@ -21,7 +21,6 @@ const HomepageContainer = styled.div`
 const ContentContainer = styled.div`
   width: 100%;
   max-width: 740px;
-  padding: 10px;
   margin: 0 auto;
 `;
 
@@ -49,6 +48,7 @@ const Homepage = () => {
     fetchPosts();
   };
 
+  console.log(posts[0]);
   return (
     <Layout>
       <HomepageContainer>
@@ -66,21 +66,22 @@ const Homepage = () => {
             <p>Đang tải bài viết...</p>
           ) : (
             posts.map((post) => (
-              <Post
-                key={post.id}
-                id={post.id}
-                author={post.author}
-                time={
-                  post.createdAt
-                    ? new Date(post.createdAt.seconds * 1000).toLocaleString()
-                    : "Unknown time"
-                }
-                content={post.content}
-                image={post.imageUrl}
-                likes={post.likes}
-                comments={post.comments}
-                shares={post.shares}
-              />
+              // <Post
+              //   key={post.id}
+              //   id={post.id}
+              //   author={post.author}
+              //   time={
+              //     post.createdAt
+              //       ? new Date(post.createdAt.seconds * 1000).toLocaleString()
+              //       : "Unknown time"
+              //   }
+              //   content={post.content}
+              //   image={post.imageUrl}
+              //   likes={post.likes}
+              //   comments={post.comments}
+              //   shares={post.shares}
+              // />
+              <Post key={post.id} post={post} />
             ))
           )}
         </ContentContainer>

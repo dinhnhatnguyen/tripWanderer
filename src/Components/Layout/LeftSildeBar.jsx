@@ -18,6 +18,7 @@ const SidebarContainer = styled.div`
   min-height: 100vh;
   padding: 20px 20px;
   box-sizing: border-box;
+  overflow-y: scroll;
 `;
 
 const MenuItem = styled.a`
@@ -30,6 +31,11 @@ const MenuItem = styled.a`
 
   &.active {
     background-color: #046cb8;
+    color: white;
+    border-radius: 5px;
+  }
+  &:hover {
+    background-color: #d0d0d0;
     color: white;
     border-radius: 5px;
   }
@@ -49,6 +55,7 @@ const FollowingItem = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 30px;
+  cursor: default;
 `;
 
 const FollowingImage = styled.img`

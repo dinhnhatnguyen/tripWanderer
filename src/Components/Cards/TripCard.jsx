@@ -1,18 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBicycle,
-  faMotorcycle,
-  faCar,
-  faWalking,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faSmile,
-  faLocationDot,
-  faClock,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CardLink = styled(Link)`
   text-decoration: none;

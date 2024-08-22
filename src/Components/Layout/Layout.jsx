@@ -1,41 +1,116 @@
+// import React from "react";
+// import styled from "styled-components";
+// import LeftSildeBar from "./LeftSildeBar";
+// import RightSlidebar from "./RightSlideBar";
+// import Footer from "./Footer";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+// const LayoutContainer = styled.div`
+//   display: flex;
+//   height: 100vh;
+//   width: 100%;
+// `;
+
+// const MainContainer = styled.div`
+//   flex: 1;
+//   display: flex;
+//   overflow: hidden;
+// `;
+
+// const ContentWrapper = styled.div`
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   overflow-y: auto;
+// `;
+
+// const Content = styled.div`
+//   display: flex;
+//   flex: 1;
+// `;
+
+// const MainContent = styled.main`
+//   flex: 1;
+//   padding: 20px;
+//   background-color: #dddd;
+// `;
+
+// const Layout = ({ children }) => {
+//   return (
+//     <LayoutContainer>
+//       <LeftSildeBar />
+//       <MainContainer>
+//         <ContentWrapper>
+//           <Content>
+//             <MainContent>{children}</MainContent>
+//             <RightSlidebar />
+//           </Content>
+//           <Footer />
+//         </ContentWrapper>
+//       </MainContainer>
+//     </LayoutContainer>
+//   );
+// };
+
+// export default Layout;
+
 import React from "react";
 import styled from "styled-components";
 import LeftSildeBar from "./LeftSildeBar";
 import RightSlidebar from "./RightSlideBar";
+import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const LayoutContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  margin: 0 auto;
   height: 100vh;
-  max-width: 1280px;
+  width: 100%;
+`;
+
+const MainContainer = styled.div`
+  flex: 1;
+  display: flex;
   overflow: hidden;
 `;
 
-const Content = styled.div`
-  overflow-y: auto;
-  display: flex;
+const ContentWrapper = styled.div`
   flex: 1;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+`;
+
+const Content = styled.div`
+  flex: 1;
+  padding: 20px;
+  background-color: #dddd;
 `;
 
 const MainContent = styled.main`
   flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: #dddd;
+`;
+
+const FooterWrapper = styled.div`
+  flex-shrink: 0;
 `;
 
 const Layout = ({ children }) => {
   return (
     <LayoutContainer>
-      <Content>
-        <LeftSildeBar />
-        <MainContent>{children}</MainContent>
+      <LeftSildeBar />
+      <MainContainer>
+        <ContentWrapper>
+          <Content>
+            <MainContent>{children}</MainContent>
+          </Content>
+          <FooterWrapper>
+            <Footer />
+          </FooterWrapper>
+        </ContentWrapper>
         <RightSlidebar />
-      </Content>
+      </MainContainer>
     </LayoutContainer>
   );
 };

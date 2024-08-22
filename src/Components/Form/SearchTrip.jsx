@@ -32,7 +32,8 @@ const Search = styled.div`
     color: #fff;
     margin: 5px;
     margin-left: auto;
-    border-radius: 10px;
+    border-radius: 10px;  
+    cursor: pointer;
   }
   
   &:hover {
