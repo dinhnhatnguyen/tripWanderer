@@ -247,6 +247,7 @@ const TimeLineItem = styled.div`
   height: 60px;
   background-color: #d0d0d0;
   border-radius: 20px;
+  cursor: pointer;
   &:hover {
     background-color: #d9e8f7;
   }
@@ -395,10 +396,6 @@ const TripComponent = ({ trip }) => {
             </div>
           ))}
         </TimeLine>
-      </TripSection>
-
-      <TripSection>
-        <SectionTitle>Chi tiết lịch trình</SectionTitle>
       </TripSection>
 
       <Rating>

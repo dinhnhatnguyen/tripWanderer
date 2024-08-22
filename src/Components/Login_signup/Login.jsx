@@ -7,9 +7,3 @@ function Login() {
 }
 
 export default Login;
-
-// const Login = () => {
-
-// };
-
-// export default Login;

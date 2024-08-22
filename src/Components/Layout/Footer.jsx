@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faFacebookF,
-//   faTiktok,
-//   faYoutube,
-// } from "@fortawesome/free-brands-svg-icons";
 
 const FooterWrapper = styled.footer`
   background-color: black;

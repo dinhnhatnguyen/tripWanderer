@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../Asset/Tripwanderer_Logo.png";
-import userAvatar from "../Asset/image/IMG_4671 2.JPG";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { auth, db } from "../../lib/firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import {
   faSearch,
   faEdit,
@@ -20,7 +22,6 @@ const NavbarHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  color: #fff;
   padding: 0;
   height: 65px;
 `;
@@ -95,9 +96,11 @@ const NavbarMenu = styled.div`
 `;
 
 const NavbarUser = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding-right: 30px;
+  cursor: pointer;
 `;
 
 const UserAvatar = styled.div`
@@ -110,6 +113,7 @@ const UserAvatar = styled.div`
     max-width: 100%;
     max-height: 100%;
     border-radius: 50%;
+    background-color: #666;
   }
 `;
 
@@ -129,6 +133,30 @@ const UserInfo = styled.div`
   }
 `;
 
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 150px;
+  z-index: 10;
+`;
+
+const DropdownItem = styled.a`
+  display: block;
+  padding: 8px 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;
+
 const NavbarButton = styled.div`
   display: flex;
   align-items: center;
@@ -136,7 +164,7 @@ const NavbarButton = styled.div`
 `;
 
 const NavbarButtonItem = styled.a`
-  isplay: flex;
+  display: flex;
   align-items: center;
   border-radius: 10px;
   padding: 10px;
@@ -157,6 +185,27 @@ const NavbarButtonItem = styled.a`
 `;
 
 const Nav = () => {
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        setUser({ ...userDoc.data(), id: user.uid });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth); // Logs the user out from Firebase Authentication
+    setDropdownOpen(false); // Closes the dropdown menu
+  };
+
   return (
     <NavbarContainer>
       <NavbarHeader>
@@ -182,20 +231,29 @@ const Nav = () => {
             <FontAwesomeIcon icon={faBell} />
           </a>
         </NavbarMenu>
-        {/* <NavbarUser>
-          <UserAvatar>
-            <img src={userAvatar} alt="User Avatar" />
-          </UserAvatar>
-          <UserInfo>
-            <div className="user-name">Nguyễn Đình Nhật</div>
-            <div className="user-role">Trip maker</div>
-          </UserInfo>
-        </NavbarUser> */}
 
-        <NavbarButton>
-          <NavbarButtonItem href="/login">Đăng nhập</NavbarButtonItem>
-          <NavbarButtonItem href="/signup">Đăng Ký</NavbarButtonItem>
-        </NavbarButton>
+        {!user ? (
+          <NavbarButton>
+            <NavbarButtonItem href="/login">Đăng nhập</NavbarButtonItem>
+            <NavbarButtonItem href="/signup">Đăng Ký</NavbarButtonItem>
+          </NavbarButton>
+        ) : (
+          <NavbarUser onClick={() => setDropdownOpen(!dropdownOpen)}>
+            <UserAvatar>
+              <img src={user.avatar} alt="User Avatar" />
+            </UserAvatar>
+            <UserInfo>
+              <div className="user-name">{user.name}</div>
+              <div className="user-role">Trip maker</div>
+            </UserInfo>
+            {dropdownOpen && (
+              <DropdownMenu>
+                <DropdownItem href="/profile">Profile</DropdownItem>
+                <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+              </DropdownMenu>
+            )}
+          </NavbarUser>
+        )}
       </NavbarHeader>
     </NavbarContainer>
   );

@@ -7,6 +7,7 @@ import Service from "./Components/Service";
 import Following from "./Components/Following";
 import Signup from "./Components/Login_signup/Signup";
 import Login from "./Components/Login_signup/Login";
+import ProfilePage from "./Components/Profile/ProfilePage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/follwing" element={<Following />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

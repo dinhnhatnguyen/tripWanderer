@@ -16,13 +16,6 @@ const ImageGrid = styled.div`
   grid-gap: 1rem;
 `;
 
-const Footer = styled.footer`
-  background-color: #f4f4f4;
-  padding: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-`;
-
 const Banner = styled.div`
   width: 100%;
   height: 285px;
@@ -154,7 +147,7 @@ const Discovery = () => {
   };
 
   const handleClosePopup = () => {
-    setPopupVisible(false); // Đóng popup
+    setPopupVisible(false); 
   };
 
   const renderPaginationButtons = () => {
