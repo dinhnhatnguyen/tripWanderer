@@ -105,10 +105,10 @@ const LeftSildeBar = () => {
         >
           <MenuIcon icon={faCompass} /> Khám phá
         </MenuItem>
-        <MenuItem href="">
+        <MenuItem href="/service">
           <MenuIcon icon={faWallet} /> Dịch vụ
         </MenuItem>
-        <MenuItem href="/">
+        <MenuItem href="/follwing">
           <MenuIcon icon={faUsers} /> Đang theo dõi
         </MenuItem>
       </Section>
