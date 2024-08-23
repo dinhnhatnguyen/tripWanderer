@@ -8,6 +8,8 @@ import Following from "./Components/Following";
 import Signup from "./Components/Login_signup/Signup";
 import Login from "./Components/Login_signup/Login";
 import ProfilePage from "./Components/Profile/ProfilePage";
+import UpdateProfile from "./Components/UpdateProfile/UpdateProfile";
+import ConfirmUser from "./Components/confirmUser/ConfirmUser";
 
 function App() {
   return (
@@ -19,7 +21,9 @@ function App() {
       <Route path="/follwing" element={<Following />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/signup/confirm" element={<ConfirmUser />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/profile/update" element={<UpdateProfile />} />
     </Routes>
   );
 }

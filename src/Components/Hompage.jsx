@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import Post from "./Cards/Post";
 import styled from "styled-components";
 import SlideImage from "./Cards/SlideImage";
 import Layout from "./Layout/Layout";
 import PostForm from "./Form/CreatePost";
 import { getPosts } from "../lib/controller";
+import { doc, getDoc } from "firebase/firestore";
 
 const HomepageContainer = styled.div`
   min-width: 100%;
@@ -48,13 +49,14 @@ const Homepage = () => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
         setUser({
-          name: user.fullName || "User",
+          name: userDoc.data().username || "Bạn",
           avatar:
-            user.avatar ||
-            "https://scontent-hkg4-2.xx.fbcdn.net/v/t39.30808-1/391399630_1488743318579614_9089216888538234146_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=zEId9J3xmIYQ7kNvgFPQCvF&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent-hkg4-2.xx&oh=00_AYDFM7f0sdKJ6saS8HGGPuRz6QuZ5tpcYRqHtWciRMvywA&oe=66CCC079", // Replace with a default avatar URL
+            userDoc.data().avatar ||
+            "https://scontent-hkg4-2.xx.fbcdn.net/v/t39.30808-1/391399630_1488743318579614_9089216888538234146_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=zEId9J3xmIYQ7kNvgFPQCvF&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent-hkg4-2.xx&oh=00_AYDFM7f0sdKJ6saS8HGGPuRz6QuZ5tpcYRqHtWciRMvywA&oe=66CCC079",
         });
       } else {
         setUser(null);
@@ -64,6 +66,8 @@ const Homepage = () => {
     // Clean up the subscription on unmount
     return () => unsubscribe();
   }, []);
+
+  console.log(user);
 
   const handleNewPost = () => {
     fetchPosts();

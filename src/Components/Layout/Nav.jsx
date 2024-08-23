@@ -205,7 +205,7 @@ const Nav = () => {
     await signOut(auth); // Logs the user out from Firebase Authentication
     setDropdownOpen(false); // Closes the dropdown menu
   };
-
+  console.log(user);
   return (
     <NavbarContainer>
       <NavbarHeader>
@@ -232,18 +232,13 @@ const Nav = () => {
           </a>
         </NavbarMenu>
 
-        {!user ? (
-          <NavbarButton>
-            <NavbarButtonItem href="/login">Đăng nhập</NavbarButtonItem>
-            <NavbarButtonItem href="/signup">Đăng Ký</NavbarButtonItem>
-          </NavbarButton>
-        ) : (
+        {user ? (
           <NavbarUser onClick={() => setDropdownOpen(!dropdownOpen)}>
             <UserAvatar>
               <img src={user.avatar} alt="User Avatar" />
             </UserAvatar>
             <UserInfo>
-              <div className="user-name">{user.name}</div>
+              <div className="user-name">{user.username}</div>
               <div className="user-role">Trip maker</div>
             </UserInfo>
             {dropdownOpen && (
@@ -253,6 +248,11 @@ const Nav = () => {
               </DropdownMenu>
             )}
           </NavbarUser>
+        ) : (
+          <NavbarButton>
+            <NavbarButtonItem href="/login">Đăng nhập</NavbarButtonItem>
+            <NavbarButtonItem href="/signup">Đăng Ký</NavbarButtonItem>
+          </NavbarButton>
         )}
       </NavbarHeader>
     </NavbarContainer>

@@ -8,7 +8,6 @@ import {
   doc,
   updateDoc,
   arrayUnion,
-  Firestore,
   increment,
   serverTimestamp,
   query,
@@ -50,18 +49,6 @@ export const uploadPost = async (content, imageFile, author) => {
   }
 };
 
-// export const getPosts = async () => {
-//   try {
-//     const querySnapshot = await getDocs(collection(db, "posts"));
-//     return querySnapshot.docs.map((doc) => ({
-//       id: doc.id,
-//       ...doc.data(),
-//     }));
-//   } catch (error) {
-//     console.error("Error getting posts: ", error);
-//     throw error;
-//   }
-// };
 export const getPosts = async () => {
   try {
     const postsRef = collection(db, "posts");
@@ -76,8 +63,6 @@ export const getPosts = async () => {
     throw error;
   }
 };
-
-// Đoạn code này sẽ gọi hàm để thêm comment vào bài viết
 
 export const unlikePost = async (postId) => {
   try {
