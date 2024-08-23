@@ -207,6 +207,7 @@ const AuthForm = ({ isLogin }) => {
             <a href="/privacy-policy">Chính sách bảo mật</a> và{" "}
             <a href="/cookie-policy">Chính sách cookie</a> của chúng tôi.
           </p>
+          {error && <p className="error-text">{error}</p>}
           <button type="submit" className="submit-btn">
             {isLogin ? "Đăng nhập" : "Đăng ký"}
           </button>
@@ -229,7 +230,7 @@ const AuthForm = ({ isLogin }) => {
             {isLogin ? "Đăng ký" : "Đăng nhập"}
           </a>
         </p>
-        {error && <p className="error-text">{error}</p>}
+        {/* {error && <p className="error-text">{error}</p>} */}
       </div>
     </div>
   );

@@ -75,7 +75,7 @@ function SearchComponent({ onSearch }) {
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
-        placeholder="Nhập địa điểm hoặc loại hình du lịch..."
+        placeholder="Nhập địa điểm du lịch mà bạn muốn khám phá..."
       />
       <SearchButton type="submit">Khám phá</SearchButton>
     </SearchBar>

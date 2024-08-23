@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import ProfileInfo from "../../components/Profile/ProfileInfo";
-// import ProfileTabs from "../../components/Profile/ProfileTabs";
-// import ProfilePosts from "../../components/Profile/ProfilePosts";
-// import ProfileTrips from "../../components/Profile/ProfileTrips";
-// import ProfileSaved from "../../components/Profile/ProfileSaved";
 import ProfileInfo from "./ProfileImtem/ProfileInfo";
 import ProfileTabs from "./ProfileImtem/ProfileTabs";
 import ProfilePosts from "./ProfileImtem/ProfilePosts";

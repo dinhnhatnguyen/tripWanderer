@@ -43,7 +43,8 @@ const Infor = styled.div`
 const InfoItem = styled.div`
   display: flex;
   align-items: center;
-  background-color: #d0d0d0;
+  background-color: #046cb8;
+  color: #fff;
   margin-bottom: 5px;
   height: 30px;
   width: auto;
@@ -62,12 +63,12 @@ const Icon = styled.div`
 
   i {
     font-size: 12px;
-    color: #c4c3c3;
+    color: #666;
     margin-right: 3px;
   }
 
   p {
-    color: #c4c3c3;
+    color: #666;
     font-size: 12px;
     line-height: 1;
     margin: 0;

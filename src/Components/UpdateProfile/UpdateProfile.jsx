@@ -8,12 +8,6 @@ const StyledContainer = styled.div`
   height: 100vh;
 `;
 
-const StyledNav = styled.div`
-  background-color: #d3cbcb;
-  width: 100%;
-  height: 10%;
-`;
-
 const StyledProfile = styled.div`
   width: 80%;
   height: 70%;
@@ -39,6 +33,7 @@ const StyledAvatar = styled.div`
     margin-right: 10px;
     border-radius: 20px;
     background-color: #046cb8;
+    border: none;
     color: white;
   }
 
@@ -185,7 +180,6 @@ const UpdateProfile = () => {
 
   return (
     <StyledContainer>
-      <StyledNav></StyledNav>
       <StyledProfile>
         <StyledAvatar>
           <img src={Avatar} alt="Avatar" />
